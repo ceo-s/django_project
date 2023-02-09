@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from parse.models import Vacancy, File, Region
+from coaching.models import Vacancy, File, Region
 
 class Command(BaseCommand):
 
