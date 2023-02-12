@@ -6,8 +6,8 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="page-heading">
-                    <h1>Contact Me</h1>
-                    <span class="subheading">Have questions? I have answers.</span>
+                    <h1>Удаление заявки</h1>
+                    <span class="subheading">Подтвердите удаление</span>
                 </div>
             </div>
         </div>
@@ -20,16 +20,16 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-                <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
+                <p>После подтвреждения действие будет невозможно отменить</p>
                 <div class="my-5">
                     
                     <form method="post" id="contactForm" data-sb-form-api-token="API_TOKEN">
                         {% csrf_token %}
-                        {{form.as_p}}
+                        
                         
               
                                                     
-                        <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Отправить</button>
+                        <div class="d-flex justify-content-center mb-4"><button class="btn btn-danger text-uppercase justify-content-center" id="submitButton" type="submit">Подтвердить</button></div>
                     </form>
                 </div>
             </div>

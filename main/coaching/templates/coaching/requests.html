@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block header %}
+<header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>Заявки</h1>
+                    <h2 class="subheading">{{coach}}</h2>
+                    <span class="meta">
+                        
+                        <a href="/#!">FIT Science</a>
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            {% for item in object_list %}
+            <div class="post-preview">
+                <a href="{% url 'coaching:posts' pk=item.pk %}">
+                    <h2 class="post-title">{{item.name}}</h2>
+                    <h3 class="post-subtitle">{{item.request}}</h3>
+                </a>
+                <p class="post-meta">
+                    {{item.experience}}
+                    <a href="#!">{{item.sport}}</a>
+                    <a href="{% url 'coaching:upd' pk=item.pk %}">Изменить данные</a>
+                </p>
+            </div>
+            {% endfor %}
+            
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,11 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
-
-
-    
-
 
 class TrainingExperience(models.Model):
     range = models.TextField()
@@ -25,17 +19,20 @@ class SportTag(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name}"
-class User():
+class User(models.Model):
     name = models.TextField()
     age = models.IntegerField()
     experience = models.ForeignKey(to=TrainingExperience, on_delete=models.CASCADE)
 
-class Coaches(User, models.Model):
+    class Meta:
+        abstract = True
+
+class Coaches(User):
     sport = models.ForeignKey(to=SportTag, on_delete=models.CASCADE)
     
     def __str__(self) -> str:
         return f"{self.pk}"
-class Students(User, models.Model):
+class Students(User):
     sport = models.ForeignKey(to=SportTag, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
@@ -50,23 +47,10 @@ class ClientRequest(models.Model):
     def __str__(self) -> str:
         return f"{self.pk}"
 
-"""class Region(models.Model):
-    region = models.TextField()
+class CoachPosts(models.Model):
+    sport = models.ForeignKey(to=SportTag, on_delete=models.CASCADE)
+    coach = models.ForeignKey(to=Coaches, on_delete=models.CASCADE)
+    text = models.TextField()
 
     def __str__(self) -> str:
-        return f"{self.pk}-{self.region}"
-
-class File(models.Model):
-    filename = models.TextField()
-
-    def __str__(self) -> str:
-        return f"{self.pk}-{self.filename}"
-
-class Vacancy(models.Model):
-    name = models.CharField(max_length=100, unique=False)
-    region = models.ForeignKey(to=Region, on_delete=models.CASCADE)
-    file = models.ForeignKey(to=File, on_delete=models.CASCADE)
-
-    def __str__(self) -> str:
-        return f"{self.pk}-{self.name}"
-"""
+        return f"{self.pk}"
