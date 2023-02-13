@@ -19,24 +19,32 @@ class SportTag(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name}"
-class User(models.Model):
-    name = models.TextField()
-    age = models.IntegerField()
-    experience = models.ForeignKey(to=TrainingExperience, on_delete=models.CASCADE)
+
+class SiteUser(models.Model):
+    name = models.TextField(null=True)
+    age = models.IntegerField(null=True)
+    experience = models.ForeignKey(to=TrainingExperience, on_delete=models.CASCADE, null=True)
+    bio = models.TextField(null=True)
 
     class Meta:
         abstract = True
 
-class Coaches(User):
-    sport = models.ForeignKey(to=SportTag, on_delete=models.CASCADE)
-    
-    def __str__(self) -> str:
-        return f"{self.pk}"
-class Students(User):
-    sport = models.ForeignKey(to=SportTag, on_delete=models.CASCADE)
+
+class Students(SiteUser):
+    sport = models.ForeignKey(to=SportTag, on_delete=models.CASCADE, null=True)
+    height = models.FloatField(null=True)
+    weight = models.FloatField(null=True)
 
     def __str__(self) -> str:
         return f"{self.pk}"
+
+class Coaches(SiteUser):
+    sport = models.ForeignKey(to=SportTag, on_delete=models.CASCADE, null=True)
+    coaching_experience = models.ForeignKey(to=CoachingExperience, on_delete=models.CASCADE, null=True)
+
+    def __str__(self) -> str:
+        return f"{self.name}"      
+
 class ClientRequest(models.Model):
     name = models.TextField()
     age = models.IntegerField()
@@ -49,7 +57,7 @@ class ClientRequest(models.Model):
 
 class CoachPosts(models.Model):
     sport = models.ForeignKey(to=SportTag, on_delete=models.CASCADE)
-    coach = models.ForeignKey(to=Coaches, on_delete=models.CASCADE)
+    #coach = models.ForeignKey(to=Coaches, on_delete=models.CASCADE)
     text = models.TextField()
 
     def __str__(self) -> str:
