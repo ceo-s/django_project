@@ -13,26 +13,6 @@ from .models import SportTag, ClientRequest, CoachPosts, Students, Coaches
 def main_page(request):
     return render(request, "coaching/index.html")
 
-def posts(request):
-    return render(request, "coaching/govno.html")
-
-
-def requests(request):    
-    return render(request, "coaching/about.html", context={"db": SportTag.objects.all()})
-
-def form(request):
-    if request.method == 'POST':
-        form = ClientForm(request.POST)
-        if form.is_valid():
-            form.save()
-            data = form.data.values()
-            print(list(data), type(data))
-        else:
-            print('IDI NAHUY')
-    else:
-        form = ClientForm()
-    return render(request, "coaching/contact.html", context={'form': form})
-
 class MyContextMixin(ContextMixin):
     def get_context_data(self, **kwargs: any) -> dict[str, any]:
         context = super().get_context_data(**kwargs)
@@ -54,7 +34,6 @@ class PostDetailView(UserPassesTestMixin, DetailView):
             return False
 
 class FormCreateView(LoginRequiredMixin, CreateView):
-    #fields = "__all__"
     model = ClientRequest
     form_class = ClientForm
     success_url = reverse_lazy("coaching:requests")

@@ -47,5 +47,4 @@ class CabinetDetailView(UserPassesTestMixin, DetailView):
             self.model = Coaches
             return True
         else:
-            return False
-        
+            return False  
