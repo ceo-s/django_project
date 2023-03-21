@@ -21,12 +21,13 @@ class RegisterUserView(CreateView):
     success_url = reverse_lazy('users:login')
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        if self.request.user.type == "ADMIN":
-            pass
-        elif self.request.user.type == "STUDENT":
-            Students.objects.create(pk=self.request.user.pk)
-        elif self.request.user.type == "COACH":
-            Coaches.objects.create(pk=self.request.user.pk)
+
+        # if self.request.user.type == "ADMIN":
+        #     pass
+        # elif self.request.user.type == "STUDENT":
+        #     Students.objects.create(pk=self.request.user.pk)
+        # elif self.request.user.type == "COACH":
+        #     Coaches.objects.create(pk=self.request.user.pk)
 
         return super().form_valid(form)
 

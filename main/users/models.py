@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from coaching.models import TrainingExperience, CoachingExperience, SportTag
 
 
 # Create your models here.
