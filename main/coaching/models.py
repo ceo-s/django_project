@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from users.models import User
-
+from django.utils.functional import cached_property
 
 
 
@@ -75,6 +75,11 @@ class ClientRequest(ActiveFieldMixin):
     sport = models.ForeignKey(to=SportTag, on_delete=models.CASCADE)
     experience = models.ForeignKey(to=TrainingExperience, on_delete=models.CASCADE)
     request = models.TextField()
+
+    @cached_property
+    def get_all_requests(self):
+        a = ClientRequest.objects.all()
+        return a
 
     def __str__(self) -> str:
         return f"{self.pk}"

@@ -27,7 +27,7 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <!-- Post preview-->
-            {% for item in object_list %}
+            {% for item in reqs %}
             <div class="post-preview">
                 <a href="{% url 'coaching:posts' pk=item.pk %}">
                     <h2 class="post-title">{{item.name}}</h2>

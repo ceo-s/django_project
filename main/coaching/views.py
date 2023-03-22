@@ -25,18 +25,23 @@ class MyContextMixin(ContextMixin):
 
 class RequestListView(ListView, MyContextMixin):
     model = ClientRequest.active_objects.all()
+    reqs = ClientRequest.active_objects.select_related("sport").all()
     def get_queryset(self):
         return self.model
     paginate_by = 2
 
     def get_context_data(self, **kwargs: any) -> dict[str, any]:
         context = super().get_context_data(**kwargs)
-        context['title']= "pasasi"
+        context['title'] = "pasasi"
+        context['model'] = ClientRequest
         return context
     template_name = "coaching/requests.html"
 
 class PostDetailView(UserPassesTestMixin, DetailView):
     model = ClientRequest
+    # requests = ClientRequest.get_all_requests()
+    # print(requests)
+    
     template_name = "coaching/posts.html"
 
     # def test_func(self):
